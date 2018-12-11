@@ -24,6 +24,14 @@ controller('myController', ['$scope', '$http',
       }
     })
     
+    $scope.username = "";
+    $http.get('/userData').success(function(data) {
+      console.log("user data:", data);
+      $scope.username = data.username;
+    })
+    
+    
+    //For handling new posts
     $scope.postText = "";
     $scope.submitPost = function() {
       
@@ -31,9 +39,42 @@ controller('myController', ['$scope', '$http',
         console.log("successful post");
         console.log(data);
         $scope.postText = "";
+        $scope.getPosts();
       })
+    }
+    
+    //For displaying posts
+    $scope.allPosts = [];
+    $scope.getPosts = function() {
+      $http.get('/allPosts').success(function(data) {
+        $scope.allPosts = data;
+      })
+    }
+    $scope.getPosts();
+    
+    $scope.formatDate = function(timestamp) {
+      var date = new Date(timestamp*1000);
+      var hour = date.getHours();
+      var min = date.getMinutes();
       
+      var amPm = "am";
+      if(hour > 12) {
+        hour -= 12;
+        amPm = "pm";
+      }
+      if(hour == 0) {
+        hour = 12;
+      }
       
+      return $scope.zeroPad(hour) + ":" + $scope.zeroPad(min) + " " + amPm;
+    }
+    
+    $scope.zeroPad= function(number) {
+      var padding = "";
+      if(number < 10) {
+        padding = "0";
+      }
+      return padding + number;
     }
   }
 ]);

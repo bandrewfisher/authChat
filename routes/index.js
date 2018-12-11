@@ -69,6 +69,7 @@ router.post('/login', users.login);
 router.get('/user/profile', users.getUserProfile);
 router.get('/allUsers', users.allUsers); 
 router.post('/submitPost', users.addPost);
-
+router.get('/allPosts', users.allPosts);
+router.get('/userData', users.userData);
 
 module.exports = router;

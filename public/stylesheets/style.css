@@ -22,6 +22,7 @@ a {
   background-color: #4788ef;
   width: 80%;
   height: 50em;
+  padding: 15px;
 }
 
 .navbar {
@@ -29,10 +30,15 @@ a {
   position: relative;
 }
 
-.nav-right {
+.logout {
   position: absolute;
   right: 5px;
 }
+
+/*.loggedIn {*/
+/*  position: absolute;*/
+/*  right: 300px;*/
+/*}*/
 
 .btn-info {
   padding: 3px;
@@ -51,4 +57,10 @@ img {
 
 p {
   padding-top: 17px;
+}
+
+.postDisplay {
+  background-color: white;
+  border-radius: 10px;
+  margin: 10px;
 }

@@ -14,7 +14,13 @@ exports.signup = function(req, res) {
   user.set('hashed_password', hashPW(req.body.password));
   console.log("after hashing user exports.signup");
   user.set('email', req.body.email);
-  user.set('profilePic', req.body.profilePic);
+
+  if (!req.body.profilePic || req.body.profilePic.trim() == "") {
+    user.set('profilePic', '/images/genIcon.jpg');
+  }
+  else {
+    user.set('profilePic', req.body.profilePic);
+  }
   console.log("after email user exports.signup");
   user.save(function(err) {
     console.log("In exports.signup");
@@ -27,6 +33,7 @@ exports.signup = function(req, res) {
       req.session.user = user.id;
       req.session.username = user.username;
       req.session.msg = 'Authenticated as ' + user.username;
+      req.session.profilePic = user.profilePic;
       res.redirect('/');
     }
   });
@@ -50,7 +57,7 @@ exports.addPost = function(req, res) {
       }
       else {
         console.log("successfully added post");
-        res.json({id: post.id})
+        res.json({ id: post.id })
       }
     })
   }
@@ -141,7 +148,7 @@ exports.deleteUser = function(req, res) {
 exports.allUsers = function(req, res) {
   if (req.session.user) {
     User.find({}).exec(function(err, users) {
-      res.send(users);
+      res.json(users);
     })
   }
   else {
@@ -150,3 +157,17 @@ exports.allUsers = function(req, res) {
   }
 };
 
+exports.allPosts = function(req, res) {
+  Post.find({}).exec(function(err, posts) {
+    res.json(posts);
+  })
+}
+
+exports.userData = function(req, res) {
+  if (req.session.user) {
+    res.send(req.session.username);
+  }
+  else {
+    res.redirect('/login');
+  }
+}
