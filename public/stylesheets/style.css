@@ -3,10 +3,6 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-a {
-  color: #00B7FF;
-}
-
 
 .sidebar {
   padding: 10px;
@@ -15,6 +11,8 @@ a {
   width: 18%;
   margin-right: 15px;
   background-color: #4788ef;
+  overflow-y: scroll;
+  border-radius: 10px;
 }
 
 .mainContent {
@@ -23,6 +21,8 @@ a {
   width: 80%;
   height: 50em;
   padding: 15px;
+  overflow-y: scroll;
+  border-radius: 10px;
 }
 
 .navbar {
@@ -63,4 +63,10 @@ p {
   background-color: white;
   border-radius: 10px;
   margin: 10px;
+}
+
+
+.postInput {
+  width: 85%;
+  height: 30px;
 }

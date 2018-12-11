@@ -48,7 +48,7 @@
         </div>
 
         <div class="mainContent">
-            <input type="text" placeholder="post" ng-model="postText" >
+            <input type="text" placeholder="post" ng-model="postText" class="postInput">
             <button class="btn btn-info" ng-click="submitPost()">Submit</button>
             <div>
                 <div class="media postDisplay" ng-repeat="post in allPosts | orderBy: '-timestamp'">
